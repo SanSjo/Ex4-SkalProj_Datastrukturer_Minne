@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -62,6 +64,11 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineList()
         {
+
+           
+
+
+            
             /*
              * Loop this method untill the user inputs something to exit to main menue.
              * Create a switch statement with cases '+' and '-'
@@ -72,12 +79,65 @@ namespace SkalProj_Datastrukturer_Minne
              * Below you can see some inspirational code to begin working.
             */
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
 
-            //switch(nav){...}
+            List<string> theList = new List<string>();
+
+            do
+            {
+                Console.WriteLine("Enter + to add or - to delete a name");
+                string input = Console.ReadLine();
+                char nav = input[0];
+                string value = input.Substring(1);
+
+
+
+                switch (nav)
+                {
+                    case '+':
+
+                        theList.Add(value);
+
+                        Console.WriteLine(theList.Count);
+                        Console.WriteLine(theList.Capacity);
+                        foreach (var item in theList)
+                        {
+                            Console.WriteLine(item);
+
+                        }
+
+                        //Console.WriteLine("You entered +");
+                        break;
+                    case '-':
+                      
+
+                        theList.Remove(value);
+                        Console.WriteLine(theList.Count);
+                        Console.WriteLine(theList.Capacity);
+                        foreach (var item in theList)
+                        {
+                            Console.WriteLine(item);
+
+                        }
+                        break;
+                    case 'Q':
+
+                        break;
+                    default:
+                        Console.WriteLine("You can only use + or -");
+                        break;
+
+                }
+            }
+            while (true);
+
+
+            //2. Listans kapacitet ökar när count är i samma storlek som capacity.
+            //3. Den ökar till dubbels så mycket. Så om den började på 4 så ökar den med 4 och kapaciteten blir 8 när count har kommit upp till 4.
+            //4. Varför ökar inte listans kapacitet i samma takt som elementen läggs till?
+            //5. nej, kapaciteten minksar inte när man tar bort element från listan
+            //6. När man vet exakt hur många element det är i listan 
+
+
         }
 
         /// <summary>
@@ -90,6 +150,44 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
+            Queue queue = new Queue();
+            
+            do
+            {
+                Console.WriteLine("Add or remove person from the queue");
+                string input = Console.ReadLine();
+
+                switch (input)
+                {
+                    case "+":
+                        
+                        string name = Console.ReadLine();
+                        queue.Enqueue(name);
+                        Console.WriteLine("People on the queue is: ");
+                        foreach (var item in queue)
+                        {
+                            
+                            Console.WriteLine(item);
+                        }
+                        Console.WriteLine("Number of persons in the queue: " + queue.Count);
+                        
+                        break;
+                    case "-":
+                        Console.WriteLine($"{queue.Peek()} is done and gone, left in line is: ");
+                        queue.Dequeue();
+                        foreach (var item in queue)
+                        {
+
+                            Console.WriteLine(item);
+                        }
+                        
+                        Console.WriteLine("Number of persons in the queue: " + queue.Count);
+                        break;
+                    case "Q":
+                        Environment.Exit(0);
+                        break;
+                }
+            } while (true);
         }
 
         /// <summary>
@@ -97,11 +195,21 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineStack()
         {
+
+            //1. Det är inte så bra att göra en stack med en ica Kö eftersom först in sist ut, vilket skulle innebära att den som kommer till kön först inte får jälp förens alla andra i kön fått hjälp. 
             /*
              * Loop this method until the user inputs something to exit to main menue.
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+
+            Console.WriteLine("Print something");
+
+            do
+            {
+
+
+            } while (true);
         }
 
         static void CheckParanthesis()
