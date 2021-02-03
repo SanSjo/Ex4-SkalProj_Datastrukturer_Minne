@@ -202,14 +202,83 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
-
-            Console.WriteLine("Print something");
+            Stack revStack = new Stack();
+            Stack newStack = new Stack();
+            //List<string> stackList = new List<string>();
 
             do
             {
+                Console.WriteLine("Add a name with + or delete with -");
+                string input = Console.ReadLine();
+
+
+                switch (input)
+                {
+                    case "+":
+                        string name = Console.ReadLine();
+
+                        newStack.Push(name);
+
+                        Console.WriteLine("Current stack: ");
+                        foreach (var item in newStack)
+                        {
+
+                            Console.WriteLine(item);
+                        }
+                        //ReverseText(newStack, revStack);
+                        while (newStack.Count != 0)
+                        {
+                            revStack.Push(newStack.Pop());
+                        }
+                        Console.WriteLine("Reversed stack: ");
+                        foreach (var item in revStack)
+                        {
+                            Console.WriteLine(item);
+                        }
+
+                        break;
+                    case "-":
+                        if (newStack.Count < 1)
+                        {
+                            Console.WriteLine("The queue is already empty");
+                           
+                           
+                        } else
+                        {
+                            newStack.Pop();
+                            foreach (var item in newStack)
+                            {
+                                Console.WriteLine(item);
+                            }
+                        }
+                   
+                        break;
+                    default:
+                        Console.WriteLine("You must print + or -");
+                        break;
+
+
+                }
+
 
 
             } while (true);
+            
+            
+
+
+            static void ReverseText(Stack newStack, Stack revStack)
+            {
+                while (newStack.Count != 0)
+                {
+                    revStack.Push(newStack.Pop());
+                }
+                Console.WriteLine("Reversed stack: ");
+                foreach (var item in revStack)
+                {
+                    Console.WriteLine(item);
+                }
+            }
         }
 
         static void CheckParanthesis()
