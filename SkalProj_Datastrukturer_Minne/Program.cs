@@ -89,8 +89,6 @@ namespace SkalProj_Datastrukturer_Minne
                 char nav = input[0];
                 string value = input.Substring(1);
 
-
-
                 switch (nav)
                 {
                     case '+':
@@ -215,6 +213,7 @@ namespace SkalProj_Datastrukturer_Minne
                 switch (input)
                 {
                     case "+":
+
                         string name = Console.ReadLine();
 
                         newStack.Push(name);
