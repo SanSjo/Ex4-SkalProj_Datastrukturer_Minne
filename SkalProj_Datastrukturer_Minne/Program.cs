@@ -200,8 +200,7 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
-            Stack revStack = new Stack();
-            Stack newStack = new Stack();
+            Stack<string> newStack = new Stack<string>();
             //List<string> stackList = new List<string>();
 
             do
@@ -224,13 +223,13 @@ namespace SkalProj_Datastrukturer_Minne
 
                             Console.WriteLine(item);
                         }
-                        //ReverseText(newStack, revStack);
-                        while (newStack.Count != 0)
-                        {
-                            revStack.Push(newStack.Pop());
-                        }
+                        newStack = ReverseText(newStack);
+                        ////while (newStack.Count != 0)
+                        ////{
+                        ////    revStack.Push(newStack.Pop());
+                        ////}
                         Console.WriteLine("Reversed stack: ");
-                        foreach (var item in revStack)
+                        foreach (var item in newStack)
                         {
                             Console.WriteLine(item);
                         }
@@ -259,26 +258,55 @@ namespace SkalProj_Datastrukturer_Minne
 
                 }
 
+                Console.WriteLine(newStack);
 
 
             } while (true);
-            
-            
 
 
-            static void ReverseText(Stack newStack, Stack revStack)
+
+
+
+
+
+            static Stack<string> ReverseText(Stack<string> newStack)
             {
-                while (newStack.Count != 0)
+                Stack<string> revStack = new Stack<string>();
+                while (newStack.Count > 0)
                 {
                     revStack.Push(newStack.Pop());
                 }
-                Console.WriteLine("Reversed stack: ");
-                foreach (var item in revStack)
-                {
-                    Console.WriteLine(item);
-                }
+                return revStack;
+
+                //        //if (newStack.Count == 0)
+                //        //{
+                //        //    return;
+                //        //    //Console.Write(newStack.Pop());
+                //        //    //revStack.Push(newStack.Pop());
+                //        //}
+                //        //var element = newStack.Pop();
+                //        //ReverseText(newStack);
+                //        //if (newStack.Count == 0)
+                //        //{
+                //        //    newStack.Push(element);
+                //        //}
+                //        //else
+                //        //{
+                //        //    var temp = newStack.Pop();
+                //        //    newStack.Push(temp);
+                //        //}
+
+
+                //        //Console.WriteLine("Reversed stack: ");
+                //        //foreach (var item in revStack)
+                //        //{
+                //        //    Console.WriteLine(item);
+                //        //}
+                //    }
             }
         }
+
+       
 
         static void CheckParanthesis()
         {
