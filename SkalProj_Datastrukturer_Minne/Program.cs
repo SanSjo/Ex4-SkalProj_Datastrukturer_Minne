@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -306,7 +307,7 @@ namespace SkalProj_Datastrukturer_Minne
             }
         }
 
-       
+
 
         static void CheckParanthesis()
         {
@@ -316,8 +317,73 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
+            Console.WriteLine("Enter a string with brackets to check if its valid or not");
+
+            string stringInput = Console.ReadLine();
+            Dictionary<char, char> bracketCheck = new Dictionary<char, char>()
+            {
+                {'(', ')'},
+                {'{', '}'},
+                {'[', ']'},
+                {'<', '>'}
+            };
+
+            Stack<char> bracketStack = new Stack<char>();
+
+
+            foreach (char bracket in stringInput)
+            {
+                if (bracketCheck.ContainsKey(bracket))
+                {
+                    bracketStack.Push(bracket);
+                }
+                else
+                {
+                    if (bracketCheck.ContainsValue(bracket))
+                    {
+                        if (bracket == bracketCheck[bracketStack.First()])
+                        {
+                            bracketStack.Pop();
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("NOt valid string");
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                
+            }
+            if (bracketStack.Count() != 0)
+            {
+                Console.WriteLine("Not valid string");
+            }
+            else
+            {
+                Console.WriteLine("Not valid string");
+
+            }
+
         }
 
-    }
+            //do
+            //{
+            //    string stringInput = Console.ReadLine();
+            //    switch (stringInput)
+            //    {
+            //        case "{":
+            //            bracketStack.Push()
+            //            break;
+            //    }
+
+            //} while (true);
+
+
+            
+        }
 }
 
