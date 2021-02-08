@@ -7,6 +7,13 @@ namespace SkalProj_Datastrukturer_Minne
 {
     class Program
     {
+
+        //Stack och Heap frågor:
+        //F1: Hur fungerar stacken och heapen? Allt som läggs i stacken raderas efter att ett program har körts och det som läggs i stacken är kod som deklarerats med value types. I heapen däremot sparas kod som minne och väntar på att utföras när den behövs tills den tas hand om av Garbage Collection. Det som läggs i heapen är referenstyper, såsom class, interface och object
+        //F2: Vad är value types och refernce types? Value types är en type som fungerar som en slags behållare som lagrar värdet där det deklareras. Reference types är en annan slags typ som refererar till ex en metod, object eller interface. Det som skiljer dem åt är att value types lagrar ett värde som skrivs ut och sedan raderas efter att programmet är kört, men det kan även lagras i heapen om det deklareras i en reference type. Medan refrence type håller ett värde och sparar det i heapen som ett minne.
+        //F3: I bild 1 returneras 3 eftersom x har deklarerats som value type i en metod som läggs på stacken. I bild 2 returneras 4 för att  - Värdet har deklarerats i en klass och när y deklareras om till x och sedan deklarerar MyValye till 4 så lagras det värdet eftersom det är en reference type. 
+        
+        
         /// <summary>
         /// The main method, vill handle the menues for the program
         /// </summary>
@@ -65,11 +72,6 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineList()
         {
-
-           
-
-
-            
             /*
              * Loop this method untill the user inputs something to exit to main menue.
              * Create a switch statement with cases '+' and '-'
@@ -103,8 +105,6 @@ namespace SkalProj_Datastrukturer_Minne
                             Console.WriteLine(item);
 
                         }
-
-                        //Console.WriteLine("You entered +");
                         break;
                     case '-':
                       
@@ -119,7 +119,7 @@ namespace SkalProj_Datastrukturer_Minne
                         }
                         break;
                     case 'Q':
-
+                        Environment.Exit(0);
                         break;
                     default:
                         Console.WriteLine("You can only use + or -");
@@ -132,7 +132,7 @@ namespace SkalProj_Datastrukturer_Minne
 
             //2. Listans kapacitet ökar när count är i samma storlek som capacity.
             //3. Den ökar till dubbels så mycket. Så om den började på 4 så ökar den med 4 och kapaciteten blir 8 när count har kommit upp till 4.
-            //4. Varför ökar inte listans kapacitet i samma takt som elementen läggs till?
+            //4. Varför ökar inte listans kapacitet i samma takt som elementen läggs till? Det tar upp för mycket minne i heapen, då det krävs fördelning av ny array och kopiering av tidigare object till den nya arrayen. I default läge så ökar kapaciteten till 4 så att arrayen kan växa och fördubblas när antalet element överträffar den interna arrayens kapacitet.
             //5. nej, kapaciteten minksar inte när man tar bort element från listan
             //6. När man vet exakt hur många element det är i listan 
 
@@ -150,19 +150,20 @@ namespace SkalProj_Datastrukturer_Minne
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
             Queue queue = new Queue();
-            
+           
+
             do
             {
-                Console.WriteLine("Add or remove person from the queue");
+                Console.WriteLine("Add a person with + enter and type name or remove with - from the queue. Press Q key to exit");
                 string input = Console.ReadLine();
+                char nav = input[0];
+                string value = input.Substring(1);
 
-                switch (input)
+                switch (nav)
                 {
-                    case "+":
-                        
-                        string name = Console.ReadLine();
-                        queue.Enqueue(name);
-                        Console.WriteLine("People on the queue is: ");
+                    case '+':
+                        queue.Enqueue(value);
+                        Console.WriteLine("People in the queue is: ");
                         foreach (var item in queue)
                         {
                             
@@ -171,19 +172,30 @@ namespace SkalProj_Datastrukturer_Minne
                         Console.WriteLine("Number of persons in the queue: " + queue.Count);
                         
                         break;
-                    case "-":
-                        Console.WriteLine($"{queue.Peek()} is done and gone, left in line is: ");
-                        queue.Dequeue();
-                        foreach (var item in queue)
+                    case '-':
+                        if(queue.Count < 1)
                         {
+                            Console.WriteLine("Queue is empty");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{queue.Peek()} is done and gone, left in line is: ");
+                            queue.Dequeue();
+                            foreach (var item in queue)
+                            {
 
-                            Console.WriteLine(item);
+                                Console.WriteLine(item);
+                            }
+
+                            Console.WriteLine("Number of persons in the queue: " + queue.Count);
                         }
                         
-                        Console.WriteLine("Number of persons in the queue: " + queue.Count);
                         break;
-                    case "Q":
+                    case 'Q':
                         Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("You can only use + or -");
                         break;
                 }
             } while (true);
@@ -196,6 +208,7 @@ namespace SkalProj_Datastrukturer_Minne
         {
 
             //1. Det är inte så bra att göra en stack med en ica Kö eftersom först in sist ut, vilket skulle innebära att den som kommer till kön först inte får jälp förens alla andra i kön fått hjälp. 
+           
             /*
              * Loop this method until the user inputs something to exit to main menue.
              * Create a switch with cases to push or pop items
@@ -206,15 +219,15 @@ namespace SkalProj_Datastrukturer_Minne
 
             do
             {
-                Console.WriteLine("Add a name with + or delete with -");
+                Console.WriteLine("Add a name with + or delete with -. Press Q key to exit");
                 string input = Console.ReadLine();
+                char nav = input[0];
+                string name = input.Substring(1);
 
 
-                switch (input)
+                switch (nav)
                 {
-                    case "+":
-
-                        string name = Console.ReadLine();
+                    case '+':
 
                         newStack.Push(name);
 
@@ -225,10 +238,7 @@ namespace SkalProj_Datastrukturer_Minne
                             Console.WriteLine(item);
                         }
                         newStack = ReverseText(newStack);
-                        ////while (newStack.Count != 0)
-                        ////{
-                        ////    revStack.Push(newStack.Pop());
-                        ////}
+                 
                         Console.WriteLine("Reversed stack: ");
                         foreach (var item in newStack)
                         {
@@ -236,7 +246,7 @@ namespace SkalProj_Datastrukturer_Minne
                         }
 
                         break;
-                    case "-":
+                    case '-':
                         if (newStack.Count < 1)
                         {
                             Console.WriteLine("The queue is already empty");
@@ -252,6 +262,9 @@ namespace SkalProj_Datastrukturer_Minne
                         }
                    
                         break;
+                    case 'Q':
+                        Environment.Exit(0);
+                        break;
                     default:
                         Console.WriteLine("You must print + or -");
                         break;
@@ -265,11 +278,6 @@ namespace SkalProj_Datastrukturer_Minne
             } while (true);
 
 
-
-
-
-
-
             static Stack<string> ReverseText(Stack<string> newStack)
             {
                 Stack<string> revStack = new Stack<string>();
@@ -278,32 +286,6 @@ namespace SkalProj_Datastrukturer_Minne
                     revStack.Push(newStack.Pop());
                 }
                 return revStack;
-
-                //        //if (newStack.Count == 0)
-                //        //{
-                //        //    return;
-                //        //    //Console.Write(newStack.Pop());
-                //        //    //revStack.Push(newStack.Pop());
-                //        //}
-                //        //var element = newStack.Pop();
-                //        //ReverseText(newStack);
-                //        //if (newStack.Count == 0)
-                //        //{
-                //        //    newStack.Push(element);
-                //        //}
-                //        //else
-                //        //{
-                //        //    var temp = newStack.Pop();
-                //        //    newStack.Push(temp);
-                //        //}
-
-
-                //        //Console.WriteLine("Reversed stack: ");
-                //        //foreach (var item in revStack)
-                //        //{
-                //        //    Console.WriteLine(item);
-                //        //}
-                //    }
             }
         }
 
@@ -330,7 +312,6 @@ namespace SkalProj_Datastrukturer_Minne
 
             Stack<char> bracketStack = new Stack<char>();
 
-
             foreach (char bracket in stringInput)
             {
                 if (bracketCheck.ContainsKey(bracket))
@@ -338,9 +319,11 @@ namespace SkalProj_Datastrukturer_Minne
                     bracketStack.Push(bracket);
                 }
                 else
-                {
+               {
+            
                     if (bracketCheck.ContainsValue(bracket))
                     {
+                       
                         if (bracket == bracketCheck[bracketStack.First()])
                         {
                             bracketStack.Pop();
@@ -348,7 +331,7 @@ namespace SkalProj_Datastrukturer_Minne
                         }
                         else
                         {
-                            Console.WriteLine("NOt valid string");
+                            Console.WriteLine("Not valid string");
                         }
                     }
                     else
@@ -358,32 +341,13 @@ namespace SkalProj_Datastrukturer_Minne
                 }
                 
             }
-            if (bracketStack.Count() != 0)
+            if (bracketStack.Count() == 0)
             {
-                Console.WriteLine("Not valid string");
-            }
-            else
-            {
-                Console.WriteLine("Not valid string");
-
+                Console.WriteLine("Valid string");
             }
 
         }
 
-            //do
-            //{
-            //    string stringInput = Console.ReadLine();
-            //    switch (stringInput)
-            //    {
-            //        case "{":
-            //            bracketStack.Push()
-            //            break;
-            //    }
-
-            //} while (true);
-
-
-            
-        }
+    }
 }
 
